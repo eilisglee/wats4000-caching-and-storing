@@ -1,31 +1,40 @@
 <template>
-    <ul class="favorite-cities">
-        <li><h2>Favorite Cities</h2></li>
-        <li v-if="favoriteCities.length < 1">No favorites cities to display.</li>
-        <li v-for="(city,index) in favoriteCities" :key="index">
-          <router-link v-bind:to="{ name: 'CurrentWeather', params: { cityId: city.id } }">{{ city.name }}</router-link> <button v-on:click="removeCity(city)" class="remove">x</button>
-        </li>
-    </ul>
+  <ul class="favorite-cities">
+    <li>
+      <h2>Favorite Cities</h2>
+    </li>
+    <li v-if="favoriteCities.length < 1">No favorites cities to display.</li>
+    <li v-for="(city,index) in favoriteCities" :key="index">
+      <router-link
+        v-bind:to="{ name: 'CurrentWeather', params: { cityId: city.id } }"
+      >{{ city.name }}</router-link>
+      <button v-on:click="removeCity(city)" class="remove">x</button>
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
-  name: 'FavoriteCities',
-  data () {
-    return {}
+  name: "FavoriteCities",
+  data() {
+    return {};
   },
   props: {
     favoriteCities: Array
   },
   methods: {
-    removeCity: function (city) {
-      // TODO: Add logic to remove a city from the `favoriteCities` array.
+    removeCity: function(city) {
+      // Add logic to remove a city from the `favoriteCities` array.
       // Hint: Use `indexOf(city)` on the `this.favoriteCities` array and then use the `splice()` method
+
+      let cityIndex = this.favoriteCities.indexOf(city);
+      this.favoriteCities.splice(cityIndex, 1);
+      this.$ls.set("favoriteCities", this.favoriteCities);
 
       // TODO: Save the new favoriteCities array to the cache.
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -39,7 +48,7 @@ export default {
 .remove {
   font-size: 0.8rem;
   color: white;
-  background: #AA0000;
+  background: #aa0000;
   padding: 2px;
   cursor: pointer;
 }

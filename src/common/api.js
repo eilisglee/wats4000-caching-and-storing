@@ -9,8 +9,8 @@ export const API = axios.create({
 API.interceptors.request.use(function (config) {
     // Set common parameters for each request to the API.
 
-    // TODO: Use your own APPID for OpenWeatherMap.org
-    config.params.APPID = 'YOUR_APPID_HERE';
+    // Use your own APPID for OpenWeatherMap.org
+    config.params.APPID = 'a7f25514d94d5be513ccaf707dc13b1c';
     config.params.units = 'imperial';
 
     return config;
